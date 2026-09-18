@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Подписание документов с ЭЦП — Darlean</title>
+<meta name="description" content="Согласование, подпись ЭЦП и хранение документов в одной системе. НУЦ РК, NCA Layer и eGov QR — без выгрузки файлов и сбора подписей вручную.">
+<meta property="og:title" content="Подписание документов с ЭЦП — Darlean">
+<meta property="og:description" content="Согласование, подпись ЭЦП и хранение документов в одной системе. НУЦ РК, NCA Layer и eGov QR — без выгрузки файлов и сбора подписей вручную.">
+<meta property="og:image" content="https://documents.darlean.kz/assets/og-image.png">
+<meta property="og:url" content="https://documents.darlean.kz/">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/darlean-dark-website-ds-6bb28544-e29f-4540-a0cd-a9b9e285c31d/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/darlean-dark-website-ds-6bb28544-e29f-4540-a0cd-a9b9e285c31d/tokens/colors.css">
+<link rel="stylesheet" href="_ds/darlean-dark-website-ds-6bb28544-e29f-4540-a0cd-a9b9e285c31d/tokens/typography.css">
+<link rel="stylesheet" href="_ds/darlean-dark-website-ds-6bb28544-e29f-4540-a0cd-a9b9e285c31d/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/darlean-dark-website-ds-6bb28544-e29f-4540-a0cd-a9b9e285c31d/tokens/radii.css">
+<link rel="stylesheet" href="_ds/darlean-dark-website-ds-6bb28544-e29f-4540-a0cd-a9b9e285c31d/tokens/motion.css">
+<link rel="stylesheet" href="_ds/darlean-dark-website-ds-6bb28544-e29f-4540-a0cd-a9b9e285c31d/tokens/base.css">
+<link rel="stylesheet" href="_ds/darlean-dark-website-ds-6bb28544-e29f-4540-a0cd-a9b9e285c31d/styles.css">
+<script src="_ds/darlean-dark-website-ds-6bb28544-e29f-4540-a0cd-a9b9e285c31d/_ds_bundle.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500&display=swap" rel="stylesheet">
+<style>
+body{margin:0;overflow-x:hidden;background:#000000;font-family:-apple-system,'SF Pro Display','Inter','Helvetica Neue',Arial,sans-serif;font-feature-settings:'cv11';color:#F5F5F7;-webkit-font-smoothing:antialiased}
+a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
+::selection{background:#0277B5;color:#fff}
+:focus-visible{outline:2px solid #039BE6;outline-offset:2px}
+@keyframes heroIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes gradFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes glowPulse{0%,100%{box-shadow:0 6px 36px -8px rgba(3,155,230,0.55),0 0 0 1px rgba(142,212,246,0.18) inset}50%{box-shadow:0 12px 72px -6px rgba(3,155,230,0.95),0 0 28px -4px rgba(142,212,246,0.45),0 0 0 1px rgba(195,232,251,0.35) inset}}
+@keyframes shineSweep{0%,55%{transform:translateX(-160%) skewX(-18deg)}85%,100%{transform:translateX(240%) skewX(-18deg)}}
+[data-grad]{position:relative;overflow:hidden;background-image:linear-gradient(110deg,#015C93,#0387C9 28%,#039BE6 42%,#8ED4F6 55%,#039BE6 68%,#0387C9 82%,#015C93) !important;background-size:280% 100% !important;animation:gradFlow 4s cubic-bezier(0.45,0,0.55,1) infinite,glowPulse 3s ease-in-out infinite;transition:transform 250ms cubic-bezier(0.25,0.1,0.25,1),filter 250ms cubic-bezier(0.25,0.1,0.25,1)}
+[data-grad]::after{content:'';position:absolute;top:0;bottom:0;left:0;width:38%;background:linear-gradient(100deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0.32) 50%,rgba(255,255,255,0) 100%);animation:shineSweep 3.4s cubic-bezier(0.4,0,0.2,1) infinite;pointer-events:none}
+[data-grad]:hover{transform:translateY(-2px);filter:brightness(1.12) saturate(1.15)}
+[data-grad]:active{transform:scale(0.97)}
+@media (prefers-reduced-motion:reduce){[data-grad]{animation:none !important}[data-grad]::after{animation:none !important}[data-reveal]{animation:none !important}}
+</style>
+</helmet>
+
+<nav style="position:sticky;top:0;z-index:50;background:rgba(0,0,0,0.72);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid rgba(255,255,255,0.06)">
+<div style="max-width:1280px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between;gap:32px;padding:0 24px">
+<span style="display:block"><img src="assets/logo-full-dark.svg" width="102" height="20" alt="Darlean" style="display:block"></span>
+<div style="display:flex;gap:12px;align-items:center">
+<button style="font-family:inherit;font-size:14px;font-weight:500;background:transparent;color:#F5F5F7;border:1px solid rgba(255,255,255,0.18);border-radius:999px;padding:9px 20px;cursor:pointer;transition:background 150ms cubic-bezier(0.25,0.1,0.25,1)" style-hover="background:#1D1D1F" style-active="opacity:0.8">Начать бесплатно</button>
+</div>
+</div>
+</nav>
+
+<section data-screen-label="Hero" style="box-sizing:border-box;padding:96px 24px 80px;background:#000000">
+<div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:56px;align-items:center">
+<div>
+<div data-reveal="" style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#0277B5;animation:heroIn 400ms cubic-bezier(0.16,1,0.3,1) both">ПОДПИСАНИЕ ДОКУМЕНТОВ</div>
+<h1 data-reveal="" style="margin:16px 0 0;font-size:clamp(32px,3.9vw,48px);line-height:1.06;letter-spacing:-0.03em;font-weight:600;color:#FFFFFF;text-wrap:pretty;animation:heroIn 400ms cubic-bezier(0.16,1,0.3,1) 60ms both">Документы подписаны<span style="display:block;background:linear-gradient(96deg,#FFFFFF 0%,#8ED4F6 45%,#039BE6 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">внутри рабочего процесса</span></h1>
+<p data-reveal="" style="margin:24px 0 0;font-family:'SF Pro Rounded','Nunito',sans-serif;font-size:17px;line-height:1.55;color:#86868B;max-width:32em;text-wrap:pretty;animation:heroIn 400ms cubic-bezier(0.16,1,0.3,1) 120ms both">Согласование, подпись ЭЦП и хранение — в одной системе. Не нужно выгружать файл, пересылать его в мессенджере и собирать подписи вручную.</p>
+<div data-reveal="" style="display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;animation:heroIn 400ms cubic-bezier(0.16,1,0.3,1) 180ms both">
+<button data-grad="" style="font-family:inherit;font-size:15px;font-weight:500;background:linear-gradient(110deg,#015C93,#0387C9 28%,#039BE6 42%,#8ED4F6 55%,#039BE6 68%,#0387C9 82%,#015C93);background-size:280% 100%;color:#FFFFFF;border:none;border-radius:999px;padding:13px 28px;cursor:pointer">Начать бесплатно</button>
+<button style="font-family:inherit;font-size:15px;font-weight:500;background:transparent;color:#F5F5F7;border:1px solid rgba(255,255,255,0.18);border-radius:999px;padding:13px 28px;cursor:pointer;transition:background 150ms cubic-bezier(0.25,0.1,0.25,1)" style-hover="background:#1D1D1F">Показать на демо</button>
+</div>
+<div data-reveal="" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;animation:heroIn 400ms cubic-bezier(0.16,1,0.3,1) 240ms both">
+<span style="font-size:12px;line-height:1;font-weight:500;color:#86868B;background:#1D1D1F;border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:7px 13px">ЭЦП НУЦ РК</span>
+<span style="font-size:12px;line-height:1;font-weight:500;color:#86868B;background:#1D1D1F;border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:7px 13px">NCA Layer</span>
+<span style="font-size:12px;line-height:1;font-weight:500;color:#86868B;background:#1D1D1F;border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:7px 13px">eGov QR</span>
+<span style="font-size:12px;line-height:1;font-weight:500;color:#86868B;background:#1D1D1F;border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:7px 13px">Аудит действий</span>
+</div>
+</div>
+<div style="background:#1D1D1F;border:1px solid rgba(255,255,255,0.10);border-radius:28px;padding:28px;min-width:0">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:16px">
+<div style="min-width:0">
+<div style="font-size:15px;font-weight:600;color:#FFFFFF">Договор поставки №417</div>
+<div style="margin-top:4px;font-size:13px;color:#6E6E73">PDF · 2 стр. · на подписи</div>
+</div>
+<span style="flex:none;font-size:12px;font-weight:500;color:#8ED4F6;background:rgba(3,155,230,0.12);border-radius:999px;padding:7px 13px">2 из 3 подписали</span>
+</div>
+<div style="margin-top:24px;display:flex;flex-direction:column;gap:0">
+<div style="display:flex;gap:14px">
+<div style="display:flex;flex-direction:column;align-items:center;flex:none"><span style="width:10px;height:10px;border-radius:50%;border:2px solid #039BE6;background:#039BE6;box-sizing:border-box"></span><span style="width:2px;flex:1;background:rgba(3,155,230,0.35);min-height:26px"></span></div>
+<div style="padding-bottom:20px"><div style="font-size:14px;font-weight:600;color:#FFFFFF">Согласовано · Финансы</div><div style="margin-top:2px;font-size:13px;color:#6E6E73">А. Жумабаева · 14:02</div></div>
+</div>
+<div style="display:flex;gap:14px">
+<div style="display:flex;flex-direction:column;align-items:center;flex:none"><span style="width:10px;height:10px;border-radius:50%;border:2px solid #039BE6;background:#039BE6;box-sizing:border-box"></span><span style="width:2px;flex:1;background:rgba(255,255,255,0.12);min-height:26px"></span></div>
+<div style="padding-bottom:20px"><div style="font-size:14px;font-weight:600;color:#FFFFFF">Подписано ЭЦП · Юрист</div><div style="margin-top:2px;font-size:13px;color:#6E6E73">Д. Сериков · 14:31 · сертификат НУЦ РК</div></div>
+</div>
+<div style="display:flex;gap:14px">
+<div style="display:flex;flex-direction:column;align-items:center;flex:none"><span style="width:10px;height:10px;border-radius:50%;border:2px solid rgba(255,255,255,0.35);box-sizing:border-box"></span></div>
+<div><div style="font-size:14px;font-weight:600;color:#FFFFFF">Ожидает подписи · Директор</div><div style="margin-top:2px;font-size:13px;color:#6E6E73">Напоминание отправлено</div></div>
+</div>
+</div>
+<div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.10);font-size:13px;line-height:1.5;color:#6E6E73">После последней подписи документ фиксируется в реестре с отметкой времени и хешем файла.</div>
+</div>
+</div>
+</section>
+
+<section data-screen-label="Как это работает" style="box-sizing:border-box;padding:96px 24px;background:#FFFFFF;color:#000000">
+<div style="max-width:1280px;margin:0 auto">
+<div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#0277B5">МАРШРУТ ДОКУМЕНТА</div>
+<h2 style="margin:16px 0 0;font-size:clamp(28px,2.8vw,40px);line-height:1.12;letter-spacing:-0.025em;font-weight:600;color:#000000;max-width:24em;text-wrap:pretty">Четыре шага от черновика до подписанного файла</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;margin-top:48px">
+<div>
+<div style="width:40px;height:40px;border-radius:50%;background:#039BE6;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#FFFFFF">1</div>
+<h3 style="margin:20px 0 0;font-size:20px;line-height:1.2;letter-spacing:-0.02em;font-weight:600;color:#000000">Документ создаётся из шаблона</h3>
+<p style="margin:10px 0 0;font-family:'SF Pro Rounded','Nunito',sans-serif;font-size:16px;line-height:1.55;color:#515154;text-wrap:pretty">Договоры, приказы, счета и кадровые формы собираются по шаблону с данными из системы.</p>
+</div>
+<div>
+<div style="width:40px;height:40px;border-radius:50%;background:#039BE6;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#FFFFFF">2</div>
+<h3 style="margin:20px 0 0;font-size:20px;line-height:1.2;letter-spacing:-0.02em;font-weight:600;color:#000000">Идёт по маршруту согласования</h3>
+<p style="margin:10px 0 0;font-family:'SF Pro Rounded','Nunito',sans-serif;font-size:16px;line-height:1.55;color:#515154;text-wrap:pretty">Последовательно или параллельно, с автоматическими напоминаниями и эскалацией по сроку.</p>
+</div>
+<div>
+<div style="width:40px;height:40px;border-radius:50%;background:#039BE6;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#FFFFFF">3</div>
+<h3 style="margin:20px 0 0;font-size:20px;line-height:1.2;letter-spacing:-0.02em;font-weight:600;color:#000000">Подписывается ЭЦП</h3>
+<p style="margin:10px 0 0;font-family:'SF Pro Rounded','Nunito',sans-serif;font-size:16px;line-height:1.55;color:#515154;text-wrap:pretty">С компьютера через NCA Layer или с телефона по eGov QR — без выгрузки файла из системы.</p>
+</div>
+<div>
+<div style="width:40px;height:40px;border-radius:50%;background:#039BE6;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:#FFFFFF">4</div>
+<h3 style="margin:20px 0 0;font-size:20px;line-height:1.2;letter-spacing:-0.02em;font-weight:600;color:#000000">Хранится с историей</h3>
+<p style="margin:10px 0 0;font-family:'SF Pro Rounded','Nunito',sans-serif;font-size:16px;line-height:1.55;color:#515154;text-wrap:pretty">Подписанный файл, все версии и лог действий остаются в карточке документа.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section data-screen-label="Способы подписи" style="box-sizing:border-box;padding:96px 24px;background:#000000">
+<div style="max-width:1280px;margin:0 auto">
+<div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#0277B5">СПОСОБЫ ПОДПИСИ</div>
+<h2 style="margin:16px 0 0;font-size:clamp(28px,2.8vw,40px);line-height:1.12;letter-spacing:-0.025em;font-weight:600;color:#FFFFFF;max-width:24em;text-wrap:pretty">Подпись по законодательству Казахстана</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:48px">
+<div style="background:#1D1D1F;border:1px solid rgba(255,255,255,0.10);border-radius:28px;padding:32px">
+<h3 style="margin:0;font-size:22px;line-height:1.2;letter-spacing:-0.02em;font-weight:600;color:#FFFFFF">ЭЦП НУЦ РК</h3>
+<p style="margin:12px 0 0;font-size:16px;line-height:1.55;color:#86868B;text-wrap:pretty">Сертификат Национального удостоверяющего центра — юридически значимая подпись для договоров, приказов и отчётности.</p>
+</div>
+<div style="background:#1D1D1F;border:1px solid rgba(255,255,255,0.10);border-radius:28px;padding:32px">
+<h3 style="margin:0;font-size:22px;line-height:1.2;letter-spacing:-0.02em;font-weight:600;color:#FFFFFF">NCA Layer</h3>
+<p style="margin:12px 0 0;font-size:16px;line-height:1.55;color:#86868B;text-wrap:pretty">Подпись с рабочего компьютера: ключ остаётся у владельца, в систему передаётся только подписанный документ.</p>
+</div>
+<div style="background:#1D1D1F;border:1px solid rgba(255,255,255,0.10);border-radius:28px;padding:32px">
+<h3 style="margin:0;font-size:22px;line-height:1.2;letter-spacing:-0.02em;font-weight:600;color:#FFFFFF">eGov QR</h3>
+<p style="margin:12px 0 0;font-size:16px;line-height:1.55;color:#86868B;text-wrap:pretty">Подпись с телефона: руководитель подтверждает документ в дороге, не открывая ноутбук.</p>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:20px">
+<div style="background:#1D1D1F;border:1px solid rgba(255,255,255,0.10);border-radius:28px;padding:32px">
+<h3 style="margin:0;font-size:20px;line-height:1.2;letter-spacing:-0.02em;font-weight:600;color:#FFFFFF">Что подписывают чаще всего</h3>
+<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:20px">
+<span style="font-size:13px;line-height:1;font-weight:500;color:#86868B;background:#000000;border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:9px 14px">Договоры и приложения</span>
+<span style="font-size:13px;line-height:1;font-weight:500;color:#86868B;background:#000000;border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:9px 14px">Счета и заявки на оплату</span>
+<span style="font-size:13px;line-height:1;font-weight:500;color:#86868B;background:#000000;border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:9px 14px">Приказы</span>
+<span style="font-size:13px;line-height:1;font-weight:500;color:#86868B;background:#000000;border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:9px 14px">Кадровые документы</span>
+<span style="font-size:13px;line-height:1;font-weight:500;color:#86868B;background:#000000;border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:9px 14px">Акты и закрывающие</span>
+<span style="font-size:13px;line-height:1;font-weight:500;color:#86868B;background:#000000;border:1px solid rgba(255,255,255,0.14);border-radius:999px;padding:9px 14px">Служебные записки</span>
+</div>
+</div>
+<div style="background:#1D1D1F;border:1px solid rgba(255,255,255,0.10);border-radius:28px;padding:32px">
+<h3 style="margin:0;font-size:20px;line-height:1.2;letter-spacing:-0.02em;font-weight:600;color:#FFFFFF">Аудит и доступ</h3>
+<p style="margin:12px 0 0;font-size:16px;line-height:1.55;color:#86868B;text-wrap:pretty">Каждое действие с документом фиксируется: кто открыл, кто согласовал, кто подписал и когда. Доступ управляется ролями — вплоть до отдельных конфиденциальных полей.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section data-screen-label="FAQ" style="box-sizing:border-box;padding:96px 24px 40px;background:#000000">
+<div style="max-width:880px;margin:0 auto">
+<h2 style="margin:0;font-size:clamp(26px,2.4vw,34px);line-height:1.14;letter-spacing:-0.025em;font-weight:600;color:#FFFFFF;text-wrap:pretty">Вопросы о подписании</h2>
+<div style="margin-top:36px;border-top:1px solid rgba(255,255,255,0.10)">
+<sc-for list="{{ faq }}" as="item" hint-placeholder-count="4">
+<div style="border-bottom:1px solid rgba(255,255,255,0.10)">
+<button onClick="{{ item.toggle }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;text-align:left;font-family:inherit;font-size:17px;font-weight:500;color:#FFFFFF;background:transparent;border:none;padding:22px 0;cursor:pointer">{{ item.q }}<span style="flex:none;font-size:22px;line-height:1;color:#6E6E73">{{ item.sign }}</span></button>
+<sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
+<p style="margin:0 0 24px;font-family:'SF Pro Rounded','Nunito',sans-serif;font-size:16px;line-height:1.6;color:#86868B;max-width:44em;text-wrap:pretty">{{ item.a }}</p>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section data-screen-label="CTA" style="box-sizing:border-box;padding:56px 24px 104px;background:#000000">
+<div style="max-width:1280px;margin:0 auto;background:#1D1D1F;border:1px solid rgba(255,255,255,0.10);border-radius:28px;padding:48px;display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between">
+<div style="min-width:280px;flex:1">
+<h2 style="margin:0;font-size:clamp(24px,2.2vw,32px);line-height:1.15;letter-spacing:-0.025em;font-weight:600;color:#FFFFFF;text-wrap:pretty">Перенесём ваши шаблоны и маршруты за неделю</h2>
+<p style="margin:14px 0 0;font-family:'SF Pro Rounded','Nunito',sans-serif;font-size:16px;line-height:1.55;color:#86868B;max-width:36em;text-wrap:pretty">Настройка согласований, ролей и шаблонов — на нашей стороне. Freemium бесплатен навсегда.</p>
+</div>
+<button data-grad="" style="font-family:inherit;font-size:15px;font-weight:500;background:linear-gradient(110deg,#015C93,#0387C9 28%,#039BE6 42%,#8ED4F6 55%,#039BE6 68%,#0387C9 82%,#015C93);background-size:280% 100%;color:#FFFFFF;border:none;border-radius:999px;padding:15px 32px;cursor:pointer;flex:none">Начать бесплатно</button>
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280}}">
+class Component extends DCLogic {
+  state = { open: 0 };
+  items = [
+    { q: 'Подписи в Darlean имеют юридическую силу?', a: 'Да. Подписание проходит через ЭЦП НУЦ РК, NCA Layer или eGov QR — в соответствии с законодательством Казахстана об электронном документе и электронной цифровой подписи.' },
+    { q: 'Нужно ли выгружать файл, чтобы подписать?', a: 'Нет. Документ подписывается в карточке: с компьютера через NCA Layer или с телефона по eGov QR. Подписанный файл и все версии остаются в системе.' },
+    { q: 'Можно ли подписывать с телефона?', a: 'Да, через eGov QR. Руководителю достаточно открыть уведомление и подтвердить документ — ноутбук и ключ на флешке не нужны.' },
+    { q: 'Как настраиваются маршруты согласования?', a: 'Маршрут задаётся по типу документа и суммам: последовательные и параллельные шаги, подписанты по роли, сроки, напоминания и эскалация. Настройку делаем при внедрении.' },
+    { q: 'Что видно в истории документа?', a: 'Кто создал, кто открывал, кто согласовал и подписал, с отметками времени. История неизменяема и выгружается вместе с документом.' }
+  ];
+  renderVals() {
+    return {
+      faq: this.items.map((it, i) => ({
+        q: it.q, a: it.a,
+        open: this.state.open === i,
+        sign: this.state.open === i ? '\u2212' : '+',
+        toggle: () => this.setState(s => ({ open: s.open === i ? -1 : i }))
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
