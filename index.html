@@ -112,7 +112,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 </div>
 </div>
 <div style="min-width:0;max-height:calc(100vh - 220px);border-radius:28px;overflow:hidden;border:1px solid rgba(255,255,255,0.10);background:#1D1D1F;margin-right:calc(-1 * min(6vw,90px))" data-fix="hero-media">
-<img src="uploads/Docflow → Все документы (Buh).png" width="2470" height="1412" fetchpriority="high" decoding="async" alt="Документооборот Darlean: все документы компании" style="display:block;width:100%;height:100%;object-fit:cover;object-position:left top">
+<img src="uploads/Docflow → Все документы (Buh).png" width="1656" height="947" fetchpriority="high" decoding="async" alt="Документооборот Darlean: все документы компании" style="display:block;width:100%;height:100%;object-fit:cover;object-position:left top">
 </div>
 </div>
 </section>
@@ -151,7 +151,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 <span style="font-size:13px;line-height:1;font-weight:500;color:#515154;background:#FFFFFF;border:1px solid rgba(0,0,0,0.10);border-radius:999px;padding:10px 14px">Договоры и счета</span>
 </div>
 </div>
-<div style="align-self:center;border-radius:18px;overflow:hidden"><img src="uploads/modal-marketing.png" width="1458" height="932" loading="lazy" decoding="async" alt="Проверка БИН/ИИН при подписании" style="display:block;width:100%;height:auto"></div>
+<div style="align-self:center;border-radius:18px;overflow:hidden"><img src="uploads/modal-marketing.png" width="1116" height="713" loading="lazy" decoding="async" alt="Проверка БИН/ИИН при подписании" style="display:block;width:100%;height:auto"></div>
 </div>
 <div style="position:sticky;top:94px;margin-bottom:32px;box-sizing:border-box;background:#EAF3FA;color:#1D1D1F;border-radius:28px;box-shadow:0 -12px 40px -12px rgba(0,0,0,0.45);padding:clamp(32px,4vw,64px);min-height:min(74vh,640px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:48px;align-items:center">
 <div style="align-self:center;border-radius:18px;overflow:hidden"><img src="uploads/Frame 1707479586.png" width="738" height="471" loading="lazy" decoding="async" alt="Отправка запроса на подпись по эл. почте или ссылке" style="display:block;width:100%;height:auto"></div>
@@ -200,7 +200,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 <p style="margin:20px 0 0;font-family:'SF Pro Rounded','Nunito',sans-serif;font-size:17px;line-height:1.55;color:#86868B;max-width:32em;text-wrap:pretty">Руководитель подтверждает документ с телефона: ноутбук и ключ на флешке не нужны. Согласование не останавливается, пока человек в дороге.</p>
 </div>
 <div style="min-width:0;display:flex;justify-content:center">
-<img src="uploads/Preview document from Request.png" width="750" height="1624" loading="lazy" decoding="async" alt="Подписание документа с телефона" style="display:block;width:100%;max-width:320px;height:auto;border-radius:28px;border:1px solid rgba(255,255,255,0.10)">
+<img src="uploads/Preview document from Request.png" width="644" height="1394" loading="lazy" decoding="async" alt="Подписание документа с телефона" style="display:block;width:100%;max-width:320px;height:auto;border-radius:28px;border:1px solid rgba(255,255,255,0.10)">
 </div>
 </div>
 </section>
@@ -604,7 +604,9 @@ class Component extends DCLogic {
 }
 </script>
 <script>
-/* Проброс рекламных меток (utm_*, gclid, fbclid, yclid) на ссылки app.darlean.kz */
+/* Проброс рекламных меток (utm_*, gclid, fbclid, yclid) на ссылки app.darlean.kz.
+   Адрес собирается в момент клика: страницу перерисовывает движок разметки,
+   и заранее прописанный адрес он затирает обратно. */
 (function(){
   var KEY = 'darlean_marks';
   var EXTRA = ['gclid','fbclid','yclid'];
@@ -628,24 +630,27 @@ class Component extends DCLogic {
   var marks = read(), fresh = fromUrl(), isNew = false;
   for (var k in fresh){ marks[k] = fresh[k]; isNew = true; }
   if (isNew) write(marks);
-  if (!Object.keys(marks).length) return;   /* меток нет — ссылки остаются как есть */
 
-  function decorate(){
-    var links = document.querySelectorAll('a[href*="app.darlean.kz"]');
-    for (var i = 0; i < links.length; i++){
-      var a = links[i], u;
-      try { u = new URL(a.href, location.href); } catch(e){ continue; }
-      for (var k in marks){
-        if (!u.searchParams.has(k)) u.searchParams.set(k, marks[k]);  /* lang и tarif не трогаем */
-      }
-      a.href = u.toString();
+  function decorate(a){
+    if (!Object.keys(marks).length) return;   /* меток нет — ссылка остаётся как есть */
+    var u;
+    try { u = new URL(a.href, location.href); } catch(e){ return; }
+    for (var k in marks){
+      if (!u.searchParams.has(k)) u.searchParams.set(k, marks[k]);  /* lang и tarif не трогаем */
     }
+    a.href = u.toString();
   }
 
-  decorate();
-  if (window.MutationObserver){
-    new MutationObserver(decorate).observe(document.body, { childList: true, subtree: true });
+  function onClick(e){
+    var t = e.target;
+    if (!t || !t.closest) return;
+    var a = t.closest('a[href*="app.darlean.kz"]');
+    if (a) decorate(a);
   }
+
+  /* Фаза перехвата: успеваем поправить адрес до перехода и до чужих обработчиков. */
+  document.addEventListener('click', onClick, true);
+  document.addEventListener('auxclick', onClick, true);   /* средняя кнопка — открыть в новой вкладке */
 })();
 </script>
 </body>
