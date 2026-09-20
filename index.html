@@ -51,6 +51,17 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 ::selection{background:#0277B5;color:#fff}
 :focus-visible{outline:2px solid #039BE6;outline-offset:2px}
 @keyframes heroIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* --- Правка вёрстки: горизонтальный скролл на узких экранах --- */
+/* Ниже 1024px сетка первого экрана переносится в одну колонку:
+   исходные minmax(320px)+minmax(340px)+56px отступа требуют 716px и не помещаются на телефон. */
+@media (max-width:1023px){
+  [data-fix="hero-grid"]{grid-template-columns:1fr}
+  [data-fix="hero-media"]{margin-right:0}
+}
+/* Страховку overflow-x на html НЕ ставим: и hidden, и clip делают html контейнером
+   прокрутки и отключают position:sticky — ломается раздел с анимацией и липкие карточки.
+   Проверено замерами. Горизонтального скролла нет и без неё: причины устранены выше.
+   У body overflow-x:hidden остаётся с самого начала, как было в дизайне. */
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes gradFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @keyframes glowPulse{0%,100%{box-shadow:0 6px 36px -8px rgba(3,155,230,0.55),0 0 0 1px rgba(142,212,246,0.18) inset}50%{box-shadow:0 12px 72px -6px rgba(3,155,230,0.95),0 0 28px -4px rgba(142,212,246,0.45),0 0 0 1px rgba(195,232,251,0.35) inset}}
@@ -72,8 +83,8 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 </div>
 </nav>
 
-<section data-screen-label="Hero" style="box-sizing:border-box;padding:32px 24px 40px;background:#000000;min-height:calc(100vh - 190px);display:flex;align-items:center">
-<div style="width:100%;max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:56px;align-items:center;grid-template-columns:minmax(320px,0.85fr) minmax(340px,1.3fr)">
+<section data-screen-label="Hero" style="box-sizing:border-box;padding:32px 24px 40px;background:#000000;min-height:calc(100vh - 190px);display:flex;align-items:center;overflow-x:clip">
+<div style="width:100%;max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:56px;align-items:center;grid-template-columns:minmax(320px,0.85fr) minmax(340px,1.3fr)" data-fix="hero-grid">
 <div>
 <div data-reveal="" style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#0277B5;animation:heroIn 400ms cubic-bezier(0.16,1,0.3,1) both">ПОДПИСАНИЕ ДОКУМЕНТОВ</div>
 <h1 data-reveal="" style="margin:16px 0 0;font-size:clamp(32px,3.9vw,48px);line-height:1.06;letter-spacing:-0.03em;font-weight:600;color:#FFFFFF;text-wrap:pretty;animation:heroIn 400ms cubic-bezier(0.16,1,0.3,1) 60ms both">Быстрое и надёжное<span style="display:block;background:linear-gradient(96deg,#FFFFFF 0%,#8ED4F6 45%,#039BE6 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent">подписание</span></h1>
@@ -82,7 +93,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 <a href="https://app.darlean.kz/signup?lang=ru&amp;tarif=TRY_FREE" data-grad="" style="font-family:inherit;font-size:15px;font-weight:500;background:linear-gradient(110deg,#015C93,#0387C9 28%,#039BE6 42%,#8ED4F6 55%,#039BE6 68%,#0387C9 82%,#015C93);background-size:280% 100%;color:#FFFFFF;border:none;border-radius:999px;padding:13px 28px;display:inline-block;line-height:1.2;text-align:center;text-decoration:none">Начать бесплатно</a>
 </div>
 </div>
-<div style="min-width:0;max-height:calc(100vh - 220px);border-radius:28px;overflow:hidden;border:1px solid rgba(255,255,255,0.10);background:#1D1D1F;margin-right:calc(-1 * min(6vw,90px))">
+<div style="min-width:0;max-height:calc(100vh - 220px);border-radius:28px;overflow:hidden;border:1px solid rgba(255,255,255,0.10);background:#1D1D1F;margin-right:calc(-1 * min(6vw,90px))" data-fix="hero-media">
 <img src="uploads/Docflow → Все документы (Buh).png" alt="Документооборот Darlean: все документы компании" style="display:block;width:100%;height:100%;object-fit:cover;object-position:left top">
 </div>
 </div>
@@ -112,7 +123,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 <section data-screen-label="Варианты подписания" style="box-sizing:border-box;padding:72px 24px 120px;background:#000000">
 <div style="max-width:1280px;margin:0 auto">
 <h2 style="margin:0 0 48px;font-size:clamp(28px,3.2vw,44px);line-height:1.1;letter-spacing:-0.03em;font-weight:600;color:#FFFFFF;max-width:16em;text-wrap:pretty">Вариант подписания для любых ситуаций</h2>
-<div style="position:sticky;top:76px;margin-bottom:32px;box-sizing:border-box;background:#F5F5F7;color:#1D1D1F;border-radius:28px;box-shadow:0 -12px 40px -12px rgba(0,0,0,0.45);padding:clamp(32px,4vw,64px);min-height:min(74vh,640px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center">
+<div style="position:sticky;top:76px;margin-bottom:32px;box-sizing:border-box;background:#F5F5F7;color:#1D1D1F;border-radius:28px;box-shadow:0 -12px 40px -12px rgba(0,0,0,0.45);padding:clamp(32px,4vw,64px);min-height:min(74vh,640px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:48px;align-items:center">
 <div>
 <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#0277B5">ЗАЩИЩЁННОЕ ПОДПИСАНИЕ</div>
 <h3 style="margin:16px 0 0;font-size:clamp(26px,2.6vw,38px);line-height:1.12;letter-spacing:-0.025em;font-weight:600;color:#000000;text-wrap:pretty">Защищённое подписание по БИН и ИИН</h3>
@@ -124,7 +135,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 </div>
 <div style="align-self:center;border-radius:18px;overflow:hidden"><img src="uploads/modal-marketing.png" alt="Проверка БИН/ИИН при подписании" style="display:block;width:100%;height:auto"></div>
 </div>
-<div style="position:sticky;top:94px;margin-bottom:32px;box-sizing:border-box;background:#EAF3FA;color:#1D1D1F;border-radius:28px;box-shadow:0 -12px 40px -12px rgba(0,0,0,0.45);padding:clamp(32px,4vw,64px);min-height:min(74vh,640px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center">
+<div style="position:sticky;top:94px;margin-bottom:32px;box-sizing:border-box;background:#EAF3FA;color:#1D1D1F;border-radius:28px;box-shadow:0 -12px 40px -12px rgba(0,0,0,0.45);padding:clamp(32px,4vw,64px);min-height:min(74vh,640px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:48px;align-items:center">
 <div style="align-self:center;border-radius:18px;overflow:hidden"><img src="uploads/Frame 1707479586.png" alt="Отправка запроса на подпись по эл. почте или ссылке" style="display:block;width:100%;height:auto"></div>
 <div>
 <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#0277B5">БЫСТРОЕ ПОДПИСАНИЕ</div>
@@ -136,7 +147,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 </div>
 </div>
 </div>
-<div style="position:sticky;top:112px;margin-bottom:32px;box-sizing:border-box;background:#F5F5F7;color:#1D1D1F;border-radius:28px;box-shadow:0 -12px 40px -12px rgba(0,0,0,0.45);padding:clamp(32px,4vw,64px);min-height:min(74vh,640px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center">
+<div style="position:sticky;top:112px;margin-bottom:32px;box-sizing:border-box;background:#F5F5F7;color:#1D1D1F;border-radius:28px;box-shadow:0 -12px 40px -12px rgba(0,0,0,0.45);padding:clamp(32px,4vw,64px);min-height:min(74vh,640px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:48px;align-items:center">
 <div>
 <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#0277B5">ВНУТРЕННИЙ КОНТУР</div>
 <h3 style="margin:16px 0 0;font-size:clamp(26px,2.6vw,38px);line-height:1.12;letter-spacing:-0.025em;font-weight:600;color:#000000;text-wrap:pretty">Внутреннее подписание документов</h3>
@@ -148,7 +159,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 </div>
 <div style="align-self:center;border-radius:18px;overflow:hidden"><img src="uploads/Frame 1707479564.png" alt="Внутренние подписанты документа" style="display:block;width:100%;height:auto"></div>
 </div>
-<div style="position:sticky;top:130px;box-sizing:border-box;background:#EAF3FA;color:#1D1D1F;border-radius:28px;box-shadow:0 -12px 40px -12px rgba(0,0,0,0.45);padding:clamp(32px,4vw,64px);min-height:min(74vh,640px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center">
+<div style="position:sticky;top:130px;box-sizing:border-box;background:#EAF3FA;color:#1D1D1F;border-radius:28px;box-shadow:0 -12px 40px -12px rgba(0,0,0,0.45);padding:clamp(32px,4vw,64px);min-height:min(74vh,640px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:48px;align-items:center">
 <div style="align-self:center;justify-self:center;max-width:420px;width:100%;border-radius:18px;overflow:hidden"><img src="uploads/Container.png" alt="Письмо контрагенту с запросом подписи" style="display:block;width:100%;height:auto"></div>
 <div>
 <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#0277B5">КОНТРАГЕНТЫ</div>
@@ -164,7 +175,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 </section>
 
 <section data-screen-label="eGov Business" style="box-sizing:border-box;padding:120px 24px;background:#000000">
-<div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:56px;align-items:center">
+<div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:56px;align-items:center">
 <div>
 <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#039BE6">МОБИЛЬНОЕ ПОДПИСАНИЕ</div>
 <h2 style="margin:18px 0 0;font-size:clamp(28px,3vw,42px);line-height:1.1;letter-spacing:-0.03em;font-weight:600;color:#FFFFFF;max-width:16em;text-wrap:pretty">Удобное подписание с телефона через eGov Business</h2>
@@ -218,8 +229,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 <span style="width:8px;height:8px;border-radius:50%;background:#039BE6"></span>
 <span style="font-size:15px;line-height:1.35;color:#F5F5F7">Ранний доступ открыт — подключаем и настраиваем маршруты вместе с вами</span>
 </div>
-<!-- СКРЫТО: кнопка формы заявки. Вернуть — убрать display:none -->
-<button onClick="{{ openForm }}" data-grad="" style="font-family:inherit;font-size:15px;font-weight:500;background:linear-gradient(110deg,#015C93,#0387C9 28%,#039BE6 42%,#8ED4F6 55%,#039BE6 68%,#0387C9 82%,#015C93);background-size:280% 100%;color:#FFFFFF;border:none;border-radius:999px;padding:13px 28px;cursor:pointer;display:none;flex:none">Оставить заявку</button>
+<button onClick="{{ openForm }}" data-grad="" style="font-family:inherit;font-size:15px;font-weight:500;background:linear-gradient(110deg,#015C93,#0387C9 28%,#039BE6 42%,#8ED4F6 55%,#039BE6 68%,#0387C9 82%,#015C93);background-size:280% 100%;color:#FFFFFF;border:none;border-radius:999px;padding:13px 28px;cursor:pointer;flex:none">Оставить заявку</button>
 </div>
 </div>
 </div>
@@ -237,7 +247,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 <div style="max-width:1280px;margin:0 auto">
 <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#039BE6">СПОСОБЫ ПОДПИСИ</div>
 <h2 style="margin:18px 0 0;font-size:clamp(28px,3.2vw,44px);line-height:1.1;letter-spacing:-0.03em;font-weight:600;color:#FFFFFF;max-width:20em;text-wrap:pretty">Подпись по законодательству Казахстана</h2>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:48px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:20px;margin-top:48px">
 <div style="background:#1D1D1F;border:1px solid rgba(255,255,255,0.10);border-radius:28px;padding:32px">
 <h3 style="margin:0;font-size:22px;line-height:1.2;letter-spacing:-0.02em;font-weight:600;color:#FFFFFF">ЭЦП НУЦ РК</h3>
 <p style="margin:12px 0 0;font-size:16px;line-height:1.55;color:#86868B;text-wrap:pretty">Сертификат Национального удостоверяющего центра — юридически значимая подпись для договоров, приказов и отчётности.</p>
@@ -251,7 +261,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 <p style="margin:12px 0 0;font-size:16px;line-height:1.55;color:#86868B;text-wrap:pretty">Подпись с телефона: руководитель подтверждает документ в дороге, не открывая ноутбук.</p>
 </div>
 </div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:20px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:20px;margin-top:20px">
 <div style="background:#1D1D1F;border:1px solid rgba(255,255,255,0.10);border-radius:28px;padding:32px">
 <h3 style="margin:0;font-size:20px;line-height:1.2;letter-spacing:-0.02em;font-weight:600;color:#FFFFFF">Что подписывают чаще всего</h3>
 <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:20px">
@@ -277,7 +287,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 <div style="font-size:13px;font-weight:600;letter-spacing:0.08em;color:#039BE6">СПОКОЙСТВИЕ ЗА ДАННЫЕ И ДЕНЬГИ</div>
 <h2 style="margin:18px 0 0;font-size:clamp(28px,3.2vw,44px);line-height:1.1;letter-spacing:-0.03em;font-weight:600;color:#FFFFFF;text-wrap:pretty">Ответим на сомнения до того, как вы их зададите</h2>
 </div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:56px">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:20px;margin-top:56px">
 <div style="background:#1D1D1F;border:1px solid rgba(255,255,255,0.10);border-radius:28px;padding:32px">
 <div style="width:44px;height:44px;border-radius:12px;background:rgba(3,155,230,0.12);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#039BE6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path></svg></div>
 <h3 style="margin:22px 0 0;font-size:22px;line-height:1.2;letter-spacing:-0.02em;font-weight:600;color:#FFFFFF">Надёжность</h3>
@@ -314,7 +324,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 <h3 style="margin:18px 0 0;font-size:clamp(26px,2.6vw,38px);line-height:1.12;letter-spacing:-0.03em;font-weight:600;color:#FFFFFF;max-width:14em;text-wrap:pretty">ИИ, который выполняет работу, а не только отвечает</h3>
 <p style="margin:18px 0 0;font-size:17px;line-height:1.55;color:rgba(255,255,255,0.9);max-width:30em;text-wrap:pretty">Дарвис видит задачи, проекты и документы, поэтому действует в рамках роли сотрудника: ставит задачи, собирает отчёты, проводит заявки по маршрутам. Данные компании не сохраняются провайдерами моделей.</p>
 </div>
-<div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
+<div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:12px">
 <div style="background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.28);border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:12px">
 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h11"></path><path d="M3 12h11"></path><path d="M3 18h11"></path><path d="m17 7 2 2 4-4"></path></svg>
 <span style="font-size:15px;font-weight:600;color:#FFFFFF">Задачи</span>
@@ -388,8 +398,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 </section>
 
 <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ false }}">
-<!-- СКРЫТО: всё окно формы заявки. Вернуть — заменить display:none обратно на display:flex -->
-<div style="position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.72);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);display:none;align-items:center;justify-content:center;padding:24px">
+<div style="position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.72);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);display:flex;align-items:center;justify-content:center;padding:24px">
 <div style="width:min(520px,100%);max-height:88vh;overflow:auto;box-sizing:border-box;background:#1D1D1F;border:1px solid rgba(255,255,255,0.10);border-radius:28px;padding:clamp(28px,3vw,40px)">
 <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px">
 <div>
@@ -399,7 +408,7 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 <button onClick="{{ closeForm }}" aria-label="Закрыть" style="flex:none;font-family:inherit;font-size:24px;line-height:1;color:#86868B;background:transparent;border:none;cursor:pointer;padding:4px">×</button>
 </div>
 <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
-<p style="margin:18px 0 0;font-size:16px;line-height:1.55;color:#86868B;text-wrap:pretty">Свяжемся в течение рабочего дня и покажем, как подписание работает внутри ваших заявок.</p>
+<p style="margin:18px 0 0;font-size:16px;line-height:1.55;color:#86868B;text-wrap:pretty">Спасибо за интерес к Darlean. Мы свяжемся с вами в течение рабочего дня, чтобы обсудить задачи вашей компании и показать продукт.</p>
 </sc-if>
 <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
 <div style="display:flex;flex-direction:column;gap:16px;margin-top:26px">
@@ -413,7 +422,10 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 </sc-for>
 </div>
 </div>
-<button onClick="{{ submitForm }}" data-grad="" style="margin-top:8px;font-family:inherit;font-size:15px;font-weight:500;background:linear-gradient(110deg,#015C93,#0387C9 28%,#039BE6 42%,#8ED4F6 55%,#039BE6 68%,#0387C9 82%,#015C93);background-size:280% 100%;color:#FFFFFF;border:none;border-radius:999px;padding:15px 32px;cursor:pointer">Отправить заявку</button>
+<sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+<div role="alert" style="margin-top:4px;padding:12px 16px;border-radius:12px;background:rgba(255,69,58,0.12);border:1px solid rgba(255,69,58,0.35);font-size:14px;line-height:1.45;color:#FF9F9A">{{ errorText }}</div>
+</sc-if>
+<button onClick="{{ submitForm }}" data-grad="" style="{{ submitStyle }}">{{ submitLabel }}</button>
 </div>
 </sc-if>
 </div>
@@ -442,13 +454,48 @@ a{color:#039BE6;text-decoration:none}a:hover{color:#8ED4F6}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280}}">
 class Component extends DCLogic {
-  state = { open: 0, formOpen: false, sent: false, size: '' };
+  state = { open: 0, formOpen: false, sent: false, size: '', sending: false, error: '' };
   hSec = React.createRef();
   hTrack = React.createRef();
   fName = React.createRef();
   fCompany = React.createRef();
   fPhone = React.createRef();
   sizeOptions = ['до 50', '50–200', '200–1000', 'больше 1000'];
+  submitBase = "margin-top:8px;font-family:inherit;font-size:15px;font-weight:500;background:linear-gradient(110deg,#015C93,#0387C9 28%,#039BE6 42%,#8ED4F6 55%,#039BE6 68%,#0387C9 82%,#015C93);background-size:280% 100%;color:#FFFFFF;border:none;border-radius:999px;padding:15px 32px;";
+  /* Отправка заявки на серверную функцию /api/lead, которая создаёт лид в Битрикс24. */
+  sendLead() {
+    if (this.state.sending) return;
+    const val = (ref) => (ref.current && ref.current.value ? ref.current.value : '').trim();
+    const name = val(this.fName), company = val(this.fCompany), phone = val(this.fPhone);
+    if (!name || !company || !phone) {
+      this.setState({ error: 'Заполните имя, название компании и телефон.' });
+      return;
+    }
+    const digits = phone.replace(/\D/g, '');
+    if (digits.length < 10 || digits.length > 15) {
+      this.setState({ error: 'Проверьте номер телефона — похоже, он неполный.' });
+      return;
+    }
+    let marks = {};
+    try { marks = JSON.parse(sessionStorage.getItem('darlean_marks')) || {}; } catch (e) {}
+    this.setState({ sending: true, error: '' });
+    const retry = 'Не удалось отправить заявку. Пожалуйста, попробуйте ещё раз.';
+    fetch('/api/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, company, phone, size: this.state.size, marks, pageUrl: location.href })
+    })
+      .then((r) => r.json().catch(() => ({})).then((d) => ({ status: r.status, data: d })))
+      .then((res) => {
+        if (res.status === 200 && res.data && res.data.ok) {
+          this.setState({ sent: true, sending: false, error: '' });
+        } else {
+          const fromServer = res.status === 400 && res.data && res.data.error ? res.data.error + ' Затем попробуйте ещё раз.' : retry;
+          this.setState({ sending: false, error: fromServer });
+        }
+      })
+      .catch(() => this.setState({ sending: false, error: 'Не удалось связаться с сервером. Проверьте интернет и попробуйте ещё раз.' }));
+  }
   icon(d) {
     return React.createElement('svg', { width: 22, height: 22, viewBox: '0 0 24 24', fill: 'none', stroke: '#8ED4F6', strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round' },
       d.map((p, i) => React.createElement('path', { key: i, d: p })));
@@ -512,9 +559,15 @@ class Component extends DCLogic {
       sent: this.state.sent,
       notSent: !this.state.sent,
       formTitle: this.state.sent ? 'Заявка отправлена' : 'Оставить заявку на ранний доступ',
-      openForm: () => this.setState({ formOpen: true, sent: false }),
-      closeForm: () => this.setState({ formOpen: false }),
-      submitForm: () => this.setState({ sent: true }),
+      openForm: () => this.setState({ formOpen: true, sent: false, error: '', sending: false }),
+      closeForm: () => this.setState({ formOpen: false, error: '', sending: false }),
+      submitForm: () => this.sendLead(),
+      submitLabel: this.state.sending ? 'Отправляем…' : 'Отправить заявку',
+      submitStyle: this.submitBase + (this.state.sending
+        ? 'opacity:0.6;cursor:progress;pointer-events:none'
+        : 'cursor:pointer'),
+      hasError: !!this.state.error,
+      errorText: this.state.error,
       sizes: this.sizeOptions.map(label => ({
         label,
         pick: () => this.setState({ size: label }),
