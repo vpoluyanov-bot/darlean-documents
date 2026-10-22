@@ -43,6 +43,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.amplitude.com">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -604,7 +605,43 @@ class Component extends DCLogic {
 }
 </script>
 <script>
-/* Проброс рекламных меток (utm_*, gclid, fbclid, yclid) на ссылки app.darlean.kz.
+/* Amplitude: просмотры страниц и сессии, без своих событий. Cookie ставится на домен
+   верхнего уровня (.darlean.kz), чтобы склеить лендинг с app.darlean.kz.
+   Загружается, когда браузер простаивает, чтобы не мешать первой отрисовке. */
+(function(){
+  var KEY = 'ddbfab1dc3700e3a1a18ef939e6d8675';
+  var SRC = 'https://cdn.amplitude.com/libs/analytics-browser-2.11.1-min.js.gz';
+
+  function topDomain(){
+    var host = location.hostname;
+    if (host === 'localhost' || /^\d+(\.\d+){3}$/.test(host)) return undefined;
+    var parts = host.split('.');
+    if (parts.length < 2) return undefined;
+    return '.' + parts.slice(-2).join('.');
+  }
+
+  function init(){
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = SRC;
+    s.onload = function(){
+      if (!window.amplitude) return;
+      try {
+        var opts = { autocapture: { elementInteractions: false } };
+        var domain = topDomain();
+        if (domain) opts.cookieOptions = { domain: domain };
+        window.amplitude.init(KEY, undefined, opts);
+      } catch(e){}   /* аналитика не должна ломать страницу */
+    };
+    document.head.appendChild(s);
+  }
+
+  if (window.requestIdleCallback) requestIdleCallback(init, { timeout: 4000 });
+  else setTimeout(init, 2000);
+})();
+</script>
+<script>
+/* Проброс рекламных меток (utm_*, gclid, fbclid, yclid) и Amplitude device id на ссылки app.darlean.kz.
    Адрес собирается в момент клика: страницу перерисовывает движок разметки,
    и заранее прописанный адрес он затирает обратно. */
 (function(){
@@ -631,13 +668,19 @@ class Component extends DCLogic {
   for (var k in fresh){ marks[k] = fresh[k]; isNew = true; }
   if (isNew) write(marks);
 
+  function deviceId(){
+    try { return window.amplitude && window.amplitude.getDeviceId && window.amplitude.getDeviceId(); } catch(e){}
+  }
+
   function decorate(a){
-    if (!Object.keys(marks).length) return;   /* меток нет — ссылка остаётся как есть */
+    var dev = deviceId();
+    if (!Object.keys(marks).length && !dev) return;   /* ни меток, ни device id — ссылка остаётся как есть */
     var u;
     try { u = new URL(a.href, location.href); } catch(e){ return; }
     for (var k in marks){
       if (!u.searchParams.has(k)) u.searchParams.set(k, marks[k]);  /* lang и tarif не трогаем */
     }
+    if (dev) u.searchParams.set('ampDeviceId', dev);   /* склейка лендинга с продуктом в Amplitude */
     a.href = u.toString();
   }
 
